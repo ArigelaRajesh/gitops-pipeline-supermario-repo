@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-    VERSION:  ${{(cat version.txt)+1}}
-      
+  VERSION: ${{(cat version.txt) + 1}}
+
 jobs:
   buildandpushdockerimage:
     runs-on: ubuntu-latest
@@ -16,10 +16,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-     - name: Login into DockerHub
-       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      - name: Login into DockerHub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-    - name: Build and Push Docker Image
-      run: |
-        docker build -t docker.io/arigelarajesh45/gamedemo:${{env.VERSION}}
-        docker push docker.io/arigelarajesh45/gamedemo:${{env.VERSION}}
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t docker.io/arigelarajesh45/gamedemo:${{env.VERSION}}
+          docker push docker.io/arigelarajesh45/gamedemo:${{env.VERSION}}
