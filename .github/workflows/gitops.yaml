@@ -1,0 +1,22 @@
+name: "SonnarQube SAST Scan"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sonarqube-sast-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          depth: 0
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
