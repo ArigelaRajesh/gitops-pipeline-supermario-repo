@@ -16,23 +16,15 @@ jobs:
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Pull Docker Image from Docker Hub
-        run: docker pull docker.io/arigelarajesh45/gamedemo:1
-
-      - name: Debug Pulled Image
-        run: docker images
-
-      - name: Save Docker Image to Workspace
+      - name: Get Docker Image from Docker Hub
         run: |
-          echo "Saving image to ${{ github.workspace }}/gamedockerimage.tar"
+          docker pull docker.io/arigelarajesh45/gamedemo:1
           mkdir -p ${{ github.workspace }}
           docker save -o ${{ github.workspace }}/gamedockerimage.tar docker.io/arigelarajesh45/gamedemo:1
-          echo "Saved image successfully!"
-          ls -la ${{ github.workspace }}
 
-      - name: Run Trivy Vulnerability Scan
+      - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
-          input: ${{ github.workspace }}/gamedockerimage.tar
+          input: /github/workspace/gamedockerimage.tar
           exit-code: "0"
           severity: "CRITICAL,HIGH"
