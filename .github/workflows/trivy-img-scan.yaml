@@ -5,9 +5,6 @@ on:
     branches:
       - main
 
-env:
-  VERSION: $(( $(cat version.txt) + 1 ))
-
 jobs:
   run_container_image_scan_on_supermario_docker_image:
     runs-on: ubuntu-latest
@@ -21,8 +18,8 @@ jobs:
 
       - name: Get Docker Image from Docker Hub
         run: |
-          docker pull docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
-          docker save -o gamedockerimage.tar docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
+          docker pull docker.io/arigelarajesh45/gamedemo:1
+          docker save -o gamedockerimage.tar docker.io/arigelarajesh45/gamedemo:1
 
       - name: List workspace files
         run: ls -la /github/workspace
