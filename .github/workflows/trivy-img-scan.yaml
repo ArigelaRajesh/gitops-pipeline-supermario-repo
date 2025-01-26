@@ -25,6 +25,6 @@ jobs:
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
-          input: /github/workspace/gamedockerimage.tar
+          input: ${{ github.workspace }}/gamedockerimage.tar
           exit-code: "0"
           severity: "CRITICAL,HIGH"
