@@ -22,11 +22,14 @@ jobs:
       - name: Get Docker Image from Docker Hub
         run: |
           docker pull docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
-          docker save -o supermariolatestdockerimage.tar docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
+          docker save gamedockerimage.tar -o docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
+
+      - name: List workspace files
+        run: ls -la /github/workspace
 
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
         with:
-          input: /github/workspace/supermariolatestdockerimage.tar
+          input: /github/workspace/gamedockerimage.tar
           exit-code: "0"
           severity: "CRITICAL,HIGH"
