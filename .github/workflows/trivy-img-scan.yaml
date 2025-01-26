@@ -22,7 +22,7 @@ jobs:
       - name: Get Docker Image from Docker Hub
         run: |
           docker pull docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
-          docker save gamedockerimage.tar -o docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
+          docker save -o gamedockerimage.tar docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
 
       - name: List workspace files
         run: ls -la /github/workspace
