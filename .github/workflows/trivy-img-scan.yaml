@@ -1,4 +1,4 @@
-name: "Run Container Scan on Super Mario Docker Image with Quality Gate"
+name: "Run Container Scan"
 
 on:
   push:
@@ -21,8 +21,8 @@ jobs:
 
       - name: Get Docker Image from Docker Hub
         run: |
-          docker pull docker.io/raghuthesecurityexpert/supermariogitopsproject:${{ env.VERSION }}
-          docker save -o supermariolatestdockerimage.tar docker.io/raghuthesecurityexpert/supermariogitopsproject:${{ env.VERSION }}
+          docker pull docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
+          docker save -o supermariolatestdockerimage.tar docker.io/arigelarajesh45/gamedemo:${{ env.VERSION }}
 
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
